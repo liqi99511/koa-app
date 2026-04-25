@@ -51,11 +51,17 @@ src/
 ```javascript
 // routes/index.js
 router.get('/resource', controller.getList)
-router.get('/resource/:id', controller.getById)
+router.get('/resource/search', controller.search)  // 特殊路径放前面
+router.get('/resource/:id', controller.getById)     // 动态参数路由放后面
 router.post('/resource', controller.create)
 router.put('/resource/:id', controller.update)
 router.delete('/resource/:id', controller.delete)
 ```
+
+### 3.3 路由顺序注意事项
+- **动态参数路由（如 `:id`）会匹配任何字符串**，包括 `search`、`list` 等特殊路径
+- 自定义路径（如 `/user/search`）必须放在动态参数路由（如 `/user/users/:id`）之前
+- 路由匹配从上到下执行，第一个匹配的路由会被使用
 
 ## 4. 控制器规范
 
